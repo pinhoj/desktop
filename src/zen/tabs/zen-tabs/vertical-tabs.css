@@ -298,7 +298,8 @@
 
     /* Scale down icon/image specifically on active press */
     #tabbrowser-tabs:not([movingtab]) & .tab-content > image:active {
-      scale: 0.92;
+      scale: 1;
+      box-shadow: inset 0 0 4px 4px rgba(0, 0, 0, 0.1);
     }
 
     /* Fallback icon for broken/missing favicons */
