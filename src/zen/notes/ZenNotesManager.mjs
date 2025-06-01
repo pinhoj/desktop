@@ -1,5 +1,6 @@
 {
 class ZenNotesManager extends ZenDOMOperatedFeature {
+  
   _animating = false;
   _lazyPref = {};
 
@@ -9,8 +10,9 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
   #confirmationTimeout = null;
 
   init() {
-    window.addEventListener('NoteClose', this.onNoteClose.bind(this));
-    window.addEventListener('NoteSelect', this.onLocationChange.bind(this));
+    /*
+    window.addEventListener('TabClose', this.onTabClose.bind(this));
+    window.addEventListener('TabSelect', this.onLocationChange.bind(this));
 
     XPCOMUtils.defineLazyPreferenceGetter(
       this._lazyPref,
@@ -23,9 +25,9 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
     document.getElementById('tabbrowser-tabpanels').addEventListener('click', this.onOverlayClick.bind(this));
     Services.obs.addObserver(this, 'quit-application-requested');
 
-    this.#addSidebarButtonListeners();
+    //this.#addSidebarButtonListeners();*/
   }
-
+/*
   #addSidebarButtonListeners() {
     this.sidebarButtons.addEventListener('command', (event) => {
       const button = event.target.closest('toolbarbutton');
@@ -37,7 +39,7 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
           break;
       }
     });
-  }
+  }*/
 
   get #currentBrowser() {
     return this.#notes.get(this.#currentNoteID)?.browser;
@@ -50,7 +52,7 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
   get #currentParentTab() {
     return this.#notes.get(this.#currentNoteID)?.parentTab;
   }
-
+/*
   onOverlayClick(event) {
     if (event.target === this.overlay && event.originalTarget !== this.contentWrapper) {
       this.closeNote({ onNoteClose: true });
@@ -121,7 +123,7 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
   hideSidebarButtons() {
     this.sidebarButtons.setAttribute('hidden', true);
   }
-
+*/
   openNote(data, existingTab = null, ownerTab = null) {
     if (this.#currentBrowser) {
       return;
@@ -130,6 +132,7 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
       gBrowser.selectedTab = this.#currentTab;
       return;
     }
+    /*
     this.animatingOpen = true;
     this._animating = true;
 
@@ -143,13 +146,13 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
     this.browserWrapper?.removeAttribute('animate-full');
     this.browserWrapper?.removeAttribute('has-finished-animation');
     this.overlay?.removeAttribute('post-fade-out');
-
+*/
     const currentTab = ownerTab ?? gBrowser.selectedTab;
 
     const browserElement = this.createBrowserElement(data.url, currentTab, existingTab);
 
     this.fillOverlay(browserElement);
-
+/*
     this.overlay.classList.add('zen-notes-overlay');
 
     this.browserWrapper.removeAttribute('animate-end');
@@ -213,9 +216,9 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
           this._animating = false;
           this.animatingOpen = false;
         });
-    });
+    });*/
   }
-
+/*
   _clearContainerStyles(container) {
     const inset = container.style.inset;
     container.removeAttribute('style');
@@ -313,6 +316,12 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
       });
   }
 
+  onTabClose(event) {
+    if (event.target === this.#currentParentTab) {
+      this.closeNote({ onTabClose: true });
+    }
+  }
+
   quickCloseNote({
     closeCurrentTab = true,
     closeParentTab = true,
@@ -376,7 +385,7 @@ class ZenNotesManager extends ZenDOMOperatedFeature {
     if (event.target === this.#currentParentTab) {
       this.closeNote({ onNoteClose: true });
     }
-  }
+  }*/
 }
 
 window.gZenNotesManager = new ZenNotesManager();
@@ -385,10 +394,10 @@ function registerWindowActors() {
     if (Services.prefs.getBoolPref('zen.notes.enabled', true)) {
       gZenActorsManager.addJSWindowActor('ZenNotes', {
         parent: {
-          esModuleURI: 'chrome://browser/content/zen-components/actors/ZenNoteParent.sys.mjs',
+          esModuleURI: 'chrome://browser/content/zen-components/actors/ZenNotesParent.sys.mjs',
         },
         child: {
-          esModuleURI: 'chrome://browser/content/zen-components/actors/ZenNoteChild.sys.mjs',
+          esModuleURI: 'chrome://browser/content/zen-components/actors/ZenNotesChild.sys.mjs',
           events: {
             DOMContentLoaded: {},
             keydown: {

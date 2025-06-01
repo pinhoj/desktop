@@ -1,16 +1,17 @@
-export class ZenNoteParent extends JSWindowActorParent {
+export class ZenNotesParent extends JSWindowActorParent {
+  /*
   constructor() {
-    console.log('[ZenNoteParent] INICIOUUUU');
+    console.log('[ZenNotesParent] INICIOUUUU');
     super();
   }
 
   async receiveMessage(message) {
     switch (message.name) {
-      case 'ZenNote:OpenNote': {
+      case 'ZenNotes:OpenNote': {
         this.openNote(this.browsingContext.topChromeWindow, message.data);
         break;
       }
-      case 'ZenNote:CloseNote': {
+      case 'ZenNotes:CloseNote': {
         const params = {
           onTabClose: true,
           ...message.data,
@@ -25,5 +26,5 @@ export class ZenNoteParent extends JSWindowActorParent {
 
   openNote(window, data) {
     window.gZenNotesManager.openNote(data);
-  }
+  }*/
 }
