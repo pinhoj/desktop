@@ -102,6 +102,8 @@ makeDraggable(element) {
   let offsetX = 0;
   let offsetY = 0;
 
+  const doc = this.contentWindow.document;
+
   element.addEventListener('mousedown', (e) => {
     // Only drag with left mouse button
     if (e.button !== 0) return;
@@ -111,7 +113,7 @@ makeDraggable(element) {
     offsetY = e.clientY - element.offsetTop;
 
     // Prevent text selection while dragging
-    document.body.style.userSelect = 'none';
+    doc.body.style.userSelect = 'none';
   });
 
   this.contentWindow.addEventListener('mousemove', (e) => {
@@ -122,7 +124,7 @@ makeDraggable(element) {
 
   this.contentWindow.addEventListener('mouseup', () => {
     isDragging = false;
-    document.body.style.userSelect = '';
+    doc.body.style.userSelect = '';
   });
 }
 
