@@ -76,6 +76,10 @@ document.addEventListener(
           case 'cmd_zenToggleTabsOnRight':
             gZenVerticalTabsManager.toggleTabsOnRight();
             break;
+          case 'cmd_zenOpenNote':
+            console.log("opening note");
+            gZenNotesManager.openNote();
+            break;
           case 'cmd_zenSplitViewLinkInNewTab':
             gZenViewSplitter.splitLinkInNewTab();
             break;

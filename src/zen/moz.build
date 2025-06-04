@@ -5,7 +5,6 @@
 
 DIRS += [
     "glance",
-    "notes",
     "mods",
     "tests",
     "toolkit",

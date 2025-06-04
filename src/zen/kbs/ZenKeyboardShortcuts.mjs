@@ -764,7 +764,7 @@ class ZenKeyboardShortcutsLoader {
 }
 
 class ZenKeyboardShortcutsVersioner {
-  static LATEST_KBS_VERSION = 9;
+  static LATEST_KBS_VERSION = 10;
 
   constructor() {}
 
@@ -983,6 +983,21 @@ class ZenKeyboardShortcutsVersioner {
           }
         }
       }
+    }
+    if (version < 10) {
+      // Migrate from 9 to 10
+      // In this new version, we add the "Open Note" shortcut to the default shortcuts
+      data.push(
+        new KeyShortcut(
+          '',
+          'W',
+          '',
+          ZEN_OTHER_SHORTCUTS_GROUP,
+          KeyShortcutModifiers.fromObject({ accel: true, shift: false, alt: false }),
+          'cmd_zenOpenNote',
+          ''
+        )
+      );
     }
     return data;
   }
