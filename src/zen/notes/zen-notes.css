@@ -1,0 +1,95 @@
+/* Sticky note container */
+#zen-sticky-note {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  width: 300px;
+  height: 200px;
+  z-index: 9999;
+  background: #FFF9C4;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 8px;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+/* Close button */
+#zen-sticky-note button.close-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #444;
+}
+
+.minimize-btn {
+  background: none; /* Removes background box */
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+
+.minimize-btn:hover {
+  color: #000;
+}
+
+/* Textarea inside the note */
+#zen-sticky-note textarea {
+  width: 100%;
+  height: calc(100% - 10px);
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  font-size: 14px;
+  color: black;
+}
+
+/*Color selector button*/
+#zen-sticky-note button.color-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  background: transparent;
+  color: #444;
+}
+
+/* Color selection panel */
+#zen-sticky-note .color-panel {
+  position: absolute;
+  bottom: 40px;
+  left: 8px;
+  display: flex;
+  gap: 6px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  user-select: none;
+}
+
+
+/* Hide the color panel */
+#zen-sticky-note .color-panel.hidden {
+  display: none;
+}
+
+/* Color swatches (color circles) */
+#zen-sticky-note .color-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
